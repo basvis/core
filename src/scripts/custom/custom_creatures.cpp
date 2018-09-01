@@ -558,6 +558,8 @@ enum Enchants
     WEP1H_AGILITY,
     WEP_SPELLPOWER,
     WEP_HEAL,
+    OFFHAND_CRUSADER,
+    OFFHAND_AGILITY,
     OFFHAND_SPIRIT,
     OFFHAND_STAM,
     OFFHAND_FROSTRES,
@@ -657,6 +659,8 @@ bool GossipSelect_EnchantNPC(Player* player, Creature* creature, uint32 sender, 
             player->ADD_GOSSIP_ITEM(5, "Healing", GOSSIP_SENDER_MAIN, WEP_HEAL);
             break;
         case EQUIPMENT_SLOT_OFFHAND:
+            player->ADD_GOSSIP_ITEM(5, "Crusader", GOSSIP_SENDER_MAIN, OFFHAND_CRUSADER);
+            player->ADD_GOSSIP_ITEM(5, "1H Agility", GOSSIP_SENDER_MAIN, OFFHAND_AGILITY);
             player->ADD_GOSSIP_ITEM(5, "Spirit", GOSSIP_SENDER_MAIN, OFFHAND_SPIRIT);
             player->ADD_GOSSIP_ITEM(5, "Stamina", GOSSIP_SENDER_MAIN, OFFHAND_STAM);
             player->ADD_GOSSIP_ITEM(5, "Frost Resistance", GOSSIP_SENDER_MAIN, OFFHAND_FROSTRES);
@@ -706,7 +710,14 @@ bool GossipSelect_EnchantNPC(Player* player, Creature* creature, uint32 sender, 
                 item = player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND);
                 id = 2505;
                 break;
-
+            case OFFHAND_AGILITY:
+                item = player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_OFFHAND);
+                id = 2564;
+                break;
+            case OFFHAND_CRUSADER:
+                item = player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_OFFHAND);
+                id = 1900;
+                break;
             case OFFHAND_SPIRIT:
             case OFFHAND_STAM:
             case OFFHAND_FROSTRES:
