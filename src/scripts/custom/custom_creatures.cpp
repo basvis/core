@@ -593,7 +593,6 @@ bool GossipSelect_BuffNPC(Player* player, Creature* creature, uint32 sender, uin
             player->CastSpell(player, 16323, true);
             player->CastSpell(player, 16326, true);
             player->CastSpell(player, 10668, true);
-            player->CastSpell(player, 23133, true);
             player->CastSpell(player, 3593, true);
             player->CastSpell(player, 11348, true);
             player->CastSpell(player, 17538, true);
@@ -609,7 +608,6 @@ bool GossipSelect_BuffNPC(Player* player, Creature* creature, uint32 sender, uin
             player->CastSpell(player, 16323, true);
             player->CastSpell(player, 16326, true);
             player->CastSpell(player, 10667, true);
-            player->CastSpell(player, 23133, true);
             player->CastSpell(player, 3593, true);
             player->CastSpell(player, 11348, true);
             player->CastSpell(player, 17538, true);
@@ -633,11 +631,11 @@ bool GossipSelect_BuffNPC(Player* player, Creature* creature, uint32 sender, uin
             player->CastSpell(player, 16326, true);
             break;
         case 7:
-            player->CastSpell(player, 13457, true);
-            player->CastSpell(player, 13459, true);
-            player->CastSpell(player, 13458, true);
-            player->CastSpell(player, 13456, true);
-            player->CastSpell(player, 13461, true);
+            player->CastSpell(player, 17543, true);
+            player->CastSpell(player, 17548, true);
+            player->CastSpell(player, 17546, true);
+            player->CastSpell(player, 17544, true);
+            player->CastSpell(player, 17549, true);
             break;
     }
 
