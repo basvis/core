@@ -550,6 +550,101 @@ bool GossipSelect_TeleportNPC(Player *player, Creature *_Creature, uint32 sender
     return true;
 }
 
+bool GossipHello_BuffNPC(Player* player, Creature* creature)
+{
+    player->ADD_GOSSIP_ITEM(5, "General raid buffs", GOSSIP_SENDER_MAIN, 1);
+    player->ADD_GOSSIP_ITEM(5, "World buffs", GOSSIP_SENDER_MAIN, 2);
+    player->ADD_GOSSIP_ITEM(5, "Tank consumables", GOSSIP_SENDER_MAIN, 3);
+    player->ADD_GOSSIP_ITEM(5, "Melee consumables", GOSSIP_SENDER_MAIN, 4);
+    player->ADD_GOSSIP_ITEM(5, "Healer consumables", GOSSIP_SENDER_MAIN, 5);
+    player->ADD_GOSSIP_ITEM(5, "Caster consumables", GOSSIP_SENDER_MAIN, 6);
+    player->ADD_GOSSIP_ITEM(5, "Protection potions", GOSSIP_SENDER_MAIN, 7);
+
+    player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+    return true;
+}
+bool GossipSelect_BuffNPC(Player* player, Creature* creature, uint32 sender, uint32 action)
+{
+    if (sender != GOSSIP_SENDER_MAIN)
+        return true;
+
+    switch (action)
+    {
+        case 1:
+            player->CastSpell(player, 21850, true);
+            player->CastSpell(player, 21564, true);
+            player->CastSpell(player, 27681, true);
+            player->CastSpell(player, 23028, true);
+            player->CastSpell(player, 25898, true);
+            break;
+        case 2:
+            player->CastSpell(player, 22818, true);
+            player->CastSpell(player, 22817, true);
+            player->CastSpell(player, 22820, true);
+            player->CastSpell(player, 22888, true);
+            player->CastSpell(player, 24425, true);
+            player->CastSpell(player, 15366, true);
+            player->CastSpell(player, 16609, true);
+            player->CastSpell(player, 23768, true);
+            break;
+        case 3:
+            player->CastSpell(player, 17626, true);
+            player->CastSpell(player, 16329, true);
+            player->CastSpell(player, 16323, true);
+            player->CastSpell(player, 16326, true);
+            player->CastSpell(player, 10668, true);
+            player->CastSpell(player, 23133, true);
+            player->CastSpell(player, 3593, true);
+            player->CastSpell(player, 11348, true);
+            player->CastSpell(player, 17538, true);
+            player->CastSpell(player, 10256, true);
+            player->CastSpell(player, 22789, true);
+            player->CastSpell(player, 5665, true);
+            player->CastSpell(player, 12175, true);
+            player->CastSpell(player, 15233, true);
+            break;
+        case 4:
+            player->CastSpell(player, 17626, true);
+            player->CastSpell(player, 16329, true);
+            player->CastSpell(player, 16323, true);
+            player->CastSpell(player, 16326, true);
+            player->CastSpell(player, 10667, true);
+            player->CastSpell(player, 23133, true);
+            player->CastSpell(player, 3593, true);
+            player->CastSpell(player, 11348, true);
+            player->CastSpell(player, 17538, true);
+            player->CastSpell(player, 18124, true);
+            player->CastSpell(player, 22789, true);
+            player->CastSpell(player, 5665, true);
+            break;
+        case 5:
+            player->CastSpell(player, 17627, true);
+            player->CastSpell(player, 18233, true);
+            player->CastSpell(player, 3593, true);
+            player->CastSpell(player, 22789, true);
+            player->CastSpell(player, 16326, true);
+            break;
+        case 6:
+            player->CastSpell(player, 17628, true);
+            player->CastSpell(player, 17539, true);
+            player->CastSpell(player, 22789, true);
+            player->CastSpell(player, 11474, true);
+            player->CastSpell(player, 22731, true);
+            player->CastSpell(player, 16326, true);
+            break;
+        case 7:
+            player->CastSpell(player, 13457, true);
+            player->CastSpell(player, 13459, true);
+            player->CastSpell(player, 13458, true);
+            player->CastSpell(player, 13456, true);
+            player->CastSpell(player, 13461, true);
+            break;
+    }
+
+    player->CLOSE_GOSSIP_MENU();
+    return true;
+}
+
 enum Enchants
 {
     WEP2H_SUPERIOR_IMPACT = 20,
@@ -1143,5 +1238,11 @@ void AddSC_custom_creatures()
     newscript = new Script;
     newscript->Name = "custom_npc_summon_debugAI";
     newscript->GetAI = &GetAI_custom_summon_debug;
+    newscript->RegisterSelf(false);
+
+    newscript = new Script;
+    newscript->Name = "custom_buff_npc";
+    newscript->pGossipHello = &GossipHello_BuffNPC;
+    newscript->pGossipSelect = &GossipSelect_BuffNPC;
     newscript->RegisterSelf(false);
 }
