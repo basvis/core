@@ -711,12 +711,22 @@ bool GossipSelect_EnchantNPC(Player* player, Creature* creature, uint32 sender, 
                 id = 2505;
                 break;
             case OFFHAND_AGILITY:
-                item = player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_OFFHAND);
-                id = 2564;
-                break;
             case OFFHAND_CRUSADER:
                 item = player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_OFFHAND);
-                id = 1900;
+                if (item && (action == OFFHAND_AGILITY || action == OFFHAND_CRUSADER)) {
+                    if (item->GetProto()->SubClass != ITEM_SUBCLASS_WEAPON_AXE && item->GetProto()->SubClass != ITEM_SUBCLASS_WEAPON_MACE
+                        && item->GetProto()->SubClass != ITEM_SUBCLASS_WEAPON_SWORD && item->GetProto()->SubClass != ITEM_SUBCLASS_WEAPON_DAGGER
+                        && item->GetProto()->SubClass != ITEM_SUBCLASS_WEAPON_FIST)
+                    {
+                        player->GetSession()->SendNotification("Requires 1 handed weapon");
+                        player->CLOSE_GOSSIP_MENU();
+                        return true;
+                    }
+                }
+                if (action == OFFHAND_AGILITY)
+                    id = 2564;
+                else if (action == OFFHAND_CRUSADER)
+                    id = 1900;
                 break;
             case OFFHAND_SPIRIT:
             case OFFHAND_STAM:
